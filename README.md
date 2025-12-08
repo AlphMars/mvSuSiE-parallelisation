@@ -419,7 +419,7 @@ It lists the PIP for each SNP and the corresponding lfsr values for that SNP wit
 <br>
 
 ### Merging with LAVA
-If you ran LAVA or another kind of local correlation analysis or you whish to map back each variant to its genomic region, you can provide it and merge it with the results above.
+If you ran LAVA or another kind of local correlation analysis or you wish to map back each variant to its genomic region, you can provide it and merge it with the results above.
 ```r
 lava <- read.table("/path/to/lava_results/all_pheno_pairs.all_loci.results.bivar.lava.fdr_sign.renamed.tsv", sep="\t", header=T)
     # a table with the following structure:
