@@ -10,10 +10,11 @@
 #SBATCH --mail-user=alfonso.martone@radboudumc.nl
 
 lava_results_df="/home/amartone/colocal/all_pheno_pairs.all_loci.results.bivar.lava.fdr_sign.tsv"
-zscores="/home/amartone/colocal/zscores_matrix.tsv"
+zscores="/path/to/zscore/matrix/zscores_matrix.tsv"
 ldsc_output="/home/amartone/genomicsem/genomicsem_cog_IR_all/LDSCoutput_all_pheno_rev_ISI.RData"
-snp_info="/home/amartone/lava/ref_genotype/g1000_eur_maf001.bim"
-prior_zscores="/home/amartone/colocal/prior_matrix_zscores.rds"
+snp_info="/path/to/ref_genotype/g1000_eur_maf001.bim"
+prior_zscores="path/to/zscore/matrix/prior_matrix_zscores.rds"
+path/to/zscore/matrix/zscores_matrix.tsv
 
 module load 2022
 module load R/4.2.1-foss-2022a
