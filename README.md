@@ -4,6 +4,10 @@ Script and README files for mvSuSiE parallelization across multiple traits and g
 The multivariate extension of the Sum of Single Effects (mvSuSiE) model performs fine-mapping on given genomic regions allowing to identify high-probability causal variants from GWAS summary statistics. It learns the patterns of shared genetic effects among traits and adapts automatically to the pattern. It's also possible to perform colocalization analyses. See the [paper][1] and the [GitHub][2] for more.
 It's an extremely time- and resource-efficient tool, however for large number of traits parallelization is needed. I created a Slurm job for HPC clusters that can be used for this purpose, integrating available information from the [original tutorial][3] and personal communications with the authors.
 
+If you use this repository, pleace cite:
+> Werme, J., van der Sluis, S., Posthuma, D., & de Leeuw, C. A. (2022). An integrated framework for local genetic correlation analysis. Nature Genetics, 54(3), 274–282. <https://doi.org/10.1038/s41588-022-01017-y>
+
+<br>
 
 I. Inferences
 --------------------------------------------
@@ -28,6 +32,9 @@ I. Inferences
 
 II. Things you need to perform mvSuSiE
 --------------------------------------------
+
+> ⚠️ ***Warning:** These scripts assume you have a HPC cluster using SLURM as job scheduler.*
+
 Being J the number of SNPs and T the number of traits:
 
 ### 1. Z-score matrix $Z$
@@ -77,7 +84,7 @@ I came to this conclusion after contacting the [authors][4], they say that using
 ### 5. Residual_variance
 It estimates the prior belief about the noise. The intercept matrix obtained from LDSC is a valid estimate.
 
-### Tips and notes
+### 6. Tips and notes
 In case you ran the LDSC through the GenomicSEM package, you will find there:
 - covariance matrices in `LDSCoutput.RData$S`
 - correlation matrices in `LDSCoutput.RData$S_Stand`
