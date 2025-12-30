@@ -5,7 +5,9 @@ The multivariate extension of the Sum of Single Effects (mvSuSiE) model performs
 It's an extremely time- and resource-efficient tool, however for large number of traits parallelization is needed. I created a Slurm job for HPC clusters that can be used for this purpose, integrating available information from the [original tutorial][3] and personal communications with the authors.
 
 
-### Inferences
+I. Inferences
+--------------------------------------------
+
 - PIP (posterior inclusion probability)
 - CSs (credibl sets)
   - designed to capture with high probability, at least one causal SNP
@@ -24,7 +26,8 @@ It's an extremely time- and resource-efficient tool, however for large number of
 
 <br>
 
-## Things you need to perform mvSuSiE
+II. Things you need to perform mvSuSiE
+--------------------------------------------
 Being J the number of SNPs and T the number of traits:
 
 ### 1. Z-score matrix $Z$
@@ -84,7 +87,7 @@ In case you ran the LDSC through the GenomicSEM package, you will find there:
 
 <br>
 
-Running mvSuSiE
+III. Running mvSuSiE
 --------------------------------------------
 
 ### 1. Estimate z-score prior matrices
@@ -118,11 +121,11 @@ This job will cal the `mvsusie_loop.R` script, in which you must further specify
 
 <br>
 
-Checking the results
+IV. Checking the results
 ------------------------------------
 Results from mvSuSiE are dense of informations. Here's what I checked for the purpose of my paper.
 
-### Successful and unsuccessful fits, null CS 
+### 1. Successful and unsuccessful fits, null CS 
 ```r
 res <- readRDS("mvsusie_results_with_prior.rds")
 library(purrr)
@@ -191,7 +194,7 @@ library(data.table)
 
 <br>
 
-### Get PIP, lfsr, and loci
+### 2. Get PIP, lfsr, and loci
 ```r
   traits <- map(res, ~ .$traits)
   traits_length <- map_int(res, ~ length(.$traits))
@@ -262,7 +265,7 @@ library(data.table)
 
 <br>
 
-### Filter for PIP > 0.95
+### 3. Filter for PIP > 0.95
 ```r
 # ---< Use map() to iterate through each element of cs_summary >--- #
     cs_pip_95 <- map(cs_summary, function(locus_result) {
@@ -300,7 +303,7 @@ library(data.table)
 
 <br>
 
-### Gather results in a table and filter for lfsr < 0.01
+### 4. Gather results in a table and filter for lfsr < 0.01
 ```r
 library(purrr)
 library(dplyr)
@@ -418,7 +421,7 @@ It lists the PIP for each SNP and the corresponding lfsr values for that SNP wit
 
 <br>
 
-### Merging with LAVA
+### 5. Merging with LAVA
 If you ran LAVA or another kind of local correlation analysis or you wish to map back each variant to its genomic region, you can provide it and merge it with the results above.
 ```r
 lava <- read.table("/path/to/lava_results/all_pheno_pairs.all_loci.results.bivar.lava.fdr_sign.renamed.tsv", sep="\t", header=T)
@@ -520,7 +523,7 @@ lava <- read.table("/path/to/lava_results/all_pheno_pairs.all_loci.results.bivar
 
 <br>
 
-### Extract general informations
+### 6. Extract general informations
 According to how results were reported in Zou 2023.
 
 ```r
